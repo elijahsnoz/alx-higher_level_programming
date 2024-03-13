@@ -16,5 +16,6 @@ def fizzbuzz():
         else:
             print(i, end=" ")
 
+
 # Call the function to print the FizzBuzz sequence
 fizzbuzz()
