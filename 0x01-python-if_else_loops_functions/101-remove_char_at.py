@@ -3,11 +3,7 @@ def remove_char_at(s, n):
     if n < 0 or n >= len(s):
         return s
 
-    new_str = ""
-    for i in range(len(s)):
-        if i != n:
-            new_str += s[i]
-
+    new_str = s[:n] + s[n+1:]
     return new_str
 
 # Example usage:
