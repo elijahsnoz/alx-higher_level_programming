@@ -8,11 +8,9 @@ number = random.randint(-10000, 10000)
 if not isinstance(number, int):
     print("Error: Wrong type")
 else:
-    # Determine the last digit of the number
     last_digit = abs(number) % 10
 
-    # Output the last digit of the number and additional information based on its value
-    print("Last digit of", number, "is", last_digit, end=" ")
+    print("Last digit of", number, "is", -last_digit if number < 0 else last_digit, end=" ")
 
     if last_digit > 5:
         print("and is greater than 5")
