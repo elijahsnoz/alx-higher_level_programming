@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 def add_tuple(tuple_a=(), tuple_b=()):
-    # Extracting the first two elements of each tuple, if available, else defaulting to 0
-    a = tuple_a[:2] + (0,) * (2 - len(tuple_a))
-    b = tuple_b[:2] + (0,) * (2 - len(tuple_b))
-    result = (a[0] + b[0], a[1] + b[1])
-    return result
+    tuple_1 = tuple_a + (0, 0)
+    tuple_2 = tuple_b + (0, 0)
+    new_tuple = tuple_1[0] + tuple_2[0], tuple_1[1] + tuple_2[1]
+    return new_tuple
