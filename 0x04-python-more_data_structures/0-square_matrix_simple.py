@@ -1,30 +1,18 @@
 #!/usr/bin/python3
 def square_matrix_simple(matrix=[]):
-    """
-    Computes the square value of all integers in a matrix.
+    '''
+        A function that returns the square value of all elements in a
+        multi dimensional list been passed as arguments.
 
-    Parameters:
-    matrix (list): A 2D array representing the matrix.
 
-    Returns:
-    list: A new matrix with each value being the square of the corresponding value in the input matrix.
-    """
+        Returns a new matrix that is of same size as the size of the
+        matrix passed to it as arguments.
 
-    # Check if the matrix is empty
-    if not matrix:
-        return []
+        You are allowed to use regular loops, map, etc
+    '''
+    new_lst = []
+    if len(matrix) == 0:
+        return new_lst
 
-    # Initialize an empty list to store the squared values
-    squared_matrix = []
-
-    # Iterate over each row in the matrix
-    for row in matrix:
-        # Initialize an empty list to store the squared values of the current row
-        squared_row = []
-        # Iterate over each element in the row and compute its square
-        for num in row:
-            squared_row.append(num ** 2)
-        # Add the squared row to the squared matrix
-        squared_matrix.append(squared_row)
-
-    return squared_matrix
+    new_lst = [[i*i for i in j] for j in matrix]
+    return new_lst
