@@ -1,9 +1,8 @@
-#!/usr/bin/python3
 class Rectangle:
     def __init__(self, width=0, height=0):
-        # Initialize width and height attributes
-        self.width = width
-        self.height = height
+        # Initialize private instance attributes
+        self.__width = width
+        self.__height = height
 
     @property
     def width(self):
