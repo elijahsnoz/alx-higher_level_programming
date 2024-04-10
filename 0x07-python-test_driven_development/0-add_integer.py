@@ -1,20 +1,21 @@
 #!/usr/bin/python3
-def add_integer(a, b=98):
-    # Check if a and b are integers or floats
-    if not isinstance(a, (int, float)) or not isinstance(b, (int, float)):
-        raise TypeError("a must be an integer or b must be an integer")
-    
-    # Cast a and b to integers if they are floats
-    if isinstance(a, float):
-        a = int(a)
-    if isinstance(b, float):
-        b = int(b)
-    
-    # Return the addition of a and b
-    return int(a + b)
+"""
+This is the "Add Integer"  module.
 
-# Test the function
-print(add_integer(5, 3))  # Output: 8
-print(add_integer(5.5, 3))  # Output: 8
-print(add_integer(5, 3.5))  # Output: 8
-print(add_integer(5.5, 3.5))  # Output: 8
+This module supplies one function, add_integer(),
+which adds together 2 int or float types and returns an int.
+"""
+
+
+def add_integer(a, b):
+    """Return the sum of two integers or floats as an integer.
+    Otherwise raise a TypeError for given incorrect argument type.
+    """
+    h = list(map(lambda x: isinstance(x, (int, float)), [a, b]))
+
+    if all(h):
+        return int(a) + int(b)
+
+    for x, y in list(zip(h, ['a', 'b'])):
+        if not x:
+            raise TypeError("{} must be an integer".format(y))
