@@ -1,19 +1,17 @@
 #!/usr/bin/python3
 """ Module for Rectangle class """
 
-from models.base import Base
 
-
-class Rectangle(Base):
+class Rectangle:
     """ Class representing a rectangle """
 
     def __init__(self, width, height, x=0, y=0, id=None):
         """ Initializes a rectangle instance """
-        super().__init__(id)
         self.width = width
         self.height = height
         self.x = x
         self.y = y
+        self.id = id
 
     @property
     def width(self):
@@ -87,14 +85,16 @@ class Rectangle(Base):
         return "[Rectangle] ({}) {}/{} - {}/{}".format(
             self.id, self.x, self.y, self.width, self.height)
 
-    def update(self, *args, **kwargs):
-        """ Updates attributes based on the arguments """
-        attributes = ["id", "width", "height", "x", "y"]
-        if args:
-            for i, arg in enumerate(args):
-                if i < len(attributes):
-                    setattr(self, attributes[i], arg)
-        elif kwargs:
-            for key, value in kwargs.items():
-                if key in attributes:
-                    setattr(self, key, value)
+    def to_dictionary(self):
+        """ Returns dictionary representation of the rectangle """
+        return {
+            'id': self.id,
+            'width': self.width,
+            'height': self.height,
+            'x': self.x,
+            'y': self.y
+        }
+
+
+if __name__ == "__main__":
+    pass  # You can add tests here if needed
