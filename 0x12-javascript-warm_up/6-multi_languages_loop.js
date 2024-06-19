@@ -1,4 +1,11 @@
 #!/usr/bin/node
-for (const line of ['C is fun', 'Python is cool', 'Javascript is amazing']) {
-    console.log(line);
-  }
+const lines = [
+  "C is fun",
+  "Python is cool",
+  "JavaScript is amazing"
+];
+
+// Loop through the array and print each string using one console.log statement
+for (let i = 0; i < lines.length; i++) {
+  console.log(lines[i]);
+}
