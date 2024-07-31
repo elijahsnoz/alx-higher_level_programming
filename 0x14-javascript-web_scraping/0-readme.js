@@ -20,4 +20,3 @@ fs.readFile(filePath, 'utf8', (err, data) => {
     process.stdout.write(data);
   }
 });
-
