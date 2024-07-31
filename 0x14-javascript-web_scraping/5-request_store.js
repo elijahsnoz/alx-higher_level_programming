@@ -16,7 +16,7 @@ const filePath = process.argv[3];
 // Make the GET request to the URL
 request(url, function (err, res, body) {
   if (err) {
-    console.error('Error:', err);
+    console.error('Error fetching URL:', err);
     process.exit(1);
   }
 
