@@ -2,58 +2,44 @@
 
 const request = require('request');
 
-// Check if the correct number of arguments is provided
-if (process.argv.length < 3) {
-  console.error('Usage: ./101-starwars_characters.js <movie_id>');
-  process.exit(1);
+// Function to fetch data from a URL and return a Promise
+function getDataFrom(url) {
+  return new Promise(function (resolve, reject) {
+    request(url, function (err, _res, body) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(body);
+      }
+    });
+  });
 }
 
-// Get the Movie ID from the command-line arguments
-const movieId = process.argv[2];
+// Error handler function to log errors
+function errHandler(err) {
+  console.log(err);
+}
 
-// Define the URL for the Star Wars API
-const apiUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}/`;
+// Function to fetch and print characters from a Star Wars movie
+function printMovieCharacters(movieId) {
+  const movieUri = `https://swapi-api.alx-tools.com/api/films/${movieId}/`;
 
-// Make the GET request to the API for the movie details
-request(apiUrl, function (err, res, body) {
-  if (err) {
-    console.error('Error:', err);
-    process.exit(1);
-  }
+  getDataFrom(movieUri)
+    .then(body => JSON.parse(body)) // Parse movie details
+    .then(res => {
+      const characters = res.characters;
+      const promises = characters.map(characterUrl => getDataFrom(characterUrl)); // Create an array of Promises
 
-  if (res.statusCode !== 200) {
-    console.error('Error: Status code', res.statusCode);
-    process.exit(1);
-  }
-
-  try {
-    const movie = JSON.parse(body);
-    const characters = movie.characters || [];
-
-    // Print the name of each character in the order they appear
-    characters.forEach(characterUrl => {
-      request(characterUrl, function (charErr, charRes, charBody) {
-        if (charErr) {
-          console.error('Error:', charErr);
-          return;
-        }
-
-        if (charRes.statusCode !== 200) {
-          console.error('Error: Status code', charRes.statusCode);
-          return;
-        }
-
-        try {
-          const character = JSON.parse(charBody);
-          console.log(character.name);
-        } catch (parseError) {
-          console.error('Error: Failed to parse character response body:', parseError);
-        }
+      return Promise.all(promises); // Wait for all character requests to complete
+    })
+    .then(results => {
+      results.forEach(result => {
+        const character = JSON.parse(result);
+        console.log(character.name); // Print each character's name
       });
-    });
-  } catch (parseError) {
-    console.error('Error: Failed to parse movie response body:', parseError);
-    process.exit(1);
-  }
-});
+    })
+    .catch(errHandler); // Handle any errors
+}
 
+// Run the function with the provided movie ID
+printMovieCharacters(process.argv[2]);
