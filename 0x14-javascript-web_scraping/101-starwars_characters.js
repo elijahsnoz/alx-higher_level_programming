@@ -27,6 +27,11 @@ function printMovieCharacters(movieId) {
   getDataFrom(movieUri)
     .then(body => JSON.parse(body)) // Parse movie details
     .then(res => {
+      if (!res.characters || res.characters.length === 0) {
+        console.log('No characters found.');
+        return;
+      }
+      
       const characters = res.characters;
       const promises = characters.map(characterUrl => getDataFrom(characterUrl)); // Create an array of Promises
 
