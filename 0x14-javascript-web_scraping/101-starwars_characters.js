@@ -48,4 +48,3 @@ function printMovieCharacters(movieId) {
 
 // Run the function with the provided movie ID
 printMovieCharacters(process.argv[2]);
-
